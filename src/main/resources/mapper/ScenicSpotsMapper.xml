@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.ScenicSpotsMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.ScenicSpots" >
+    <id column="spotsid" property="spotsid" jdbcType="BIGINT" />
+    <result column="spotsName" property="spotsname" jdbcType="VARCHAR" />
+    <result column="spotsAddr" property="spotsaddr" jdbcType="VARCHAR" />
+    <result column="spotsAddr2" property="spotsaddr2" jdbcType="VARCHAR" />
+    <result column="spotsOpenTime" property="spotsopentime" jdbcType="VARCHAR" />
+    <result column="spotsOneWorlds" property="spotsoneworlds" jdbcType="VARCHAR" />
+    <result column="spotsImg" property="spotsimg" jdbcType="VARCHAR" />
+    <result column="spotsState" property="spotsstate" jdbcType="INTEGER" />
+    <result column="spotsFirst" property="spotsfirst" jdbcType="INTEGER" />
+    <result column="spotsHot" property="spotshot" jdbcType="INTEGER" />
+    <result column="spotsAreaId" property="spotsareaid" jdbcType="BIGINT" />
+    <result column="spotsAreaname" property="spotsareaname" jdbcType="VARCHAR" />
+    <result column="spotsprice" property="spotsprice" jdbcType="REAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tang.panda.pojo.ScenicSpots" extends="BaseResultMap" >
+    <result column="spotsDesc" property="spotsdesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    spotsid, spotsName, spotsAddr, spotsAddr2, spotsOpenTime, spotsOneWorlds, spotsImg,
+    spotsState, spotsFirst, spotsHot, spotsAreaId, spotsAreaname, spotsprice
+  </sql>
+  <sql id="Blob_Column_List" >
+    spotsDesc
+  </sql>
+  <select id="selectScenicSpotsList" resultMap="ResultMapWithBLOBs" parameterType="com.tang.panda.pojo.ScenicSpots" >
+    select
+    spotsid,spotsName,spotsAddr,spotsOpenTime,spotsOneWorlds,
+    spotsImg,spotsState, spotsFirst,spotsHot,spotsAreaId,
+    spotsAreaname,spotsprice
+    from scenicspots
+    <where>
+      <if test="spotsstate!=null and spotsstate!=-1 ">
+        and spotsstate=#{spotsstate}
+      </if>
+      <if test="spotsname!=null and spotsname!='' ">
+        and spotsname like #{spotsname}
+      </if>
+      <if test="spotsareaname!=null and spotsareaname!='' ">
+        and spotsareaname like #{spotsareaname}
+      </if>
+    </where>
+  </select>
+  <select id="selectScenicSpotsAll" resultMap="ResultMapWithBLOBs" parameterType="com.tang.panda.pojo.ScenicSpots" >
+    select
+    spotsid,spotsName,spotsAddr,spotsOpenTime,spotsOneWorlds,
+    spotsImg,spotsState, spotsFirst,spotsHot,spotsAreaId,
+    spotsAreaname,spotsprice
+    from scenicspots
+    <where>
+      <if test="spotsstate!=null and spotsstate!=-1 ">
+        and spotsstate=#{spotsstate}
+      </if>
+      <if test="spotsname!=null and spotsname!='' ">
+        and spotsname like #{spotsname}
+      </if>
+      <if test="spotsareaname!=null and spotsareaname!='' ">
+        and spotsareaname like #{spotsareaname}
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from scenicspots
+    where spotsid = #{spotsid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from scenicspots
+    where spotsid = #{spotsid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.ScenicSpots" >
+    insert into scenicspots (spotsid, spotsName, spotsAddr,
+      spotsAddr2, spotsOpenTime, spotsOneWorlds,
+      spotsImg, spotsState, spotsFirst,
+      spotsHot, spotsAreaId, spotsAreaname,
+      spotsprice, spotsDesc)
+    values (#{spotsid,jdbcType=BIGINT}, #{spotsname,jdbcType=VARCHAR}, #{spotsaddr,jdbcType=VARCHAR},
+      #{spotsaddr2,jdbcType=VARCHAR}, #{spotsopentime,jdbcType=VARCHAR}, #{spotsoneworlds,jdbcType=VARCHAR},
+      #{spotsimg,jdbcType=VARCHAR}, #{spotsstate,jdbcType=INTEGER}, #{spotsfirst,jdbcType=INTEGER},
+      #{spotshot,jdbcType=INTEGER}, #{spotsareaid,jdbcType=BIGINT}, #{spotsareaname,jdbcType=VARCHAR},
+      #{spotsprice,jdbcType=REAL}, #{spotsdesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.ScenicSpots" >
+    insert into scenicspots
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="spotsid != null" >
+        spotsid,
+      </if>
+      <if test="spotsname != null" >
+        spotsName,
+      </if>
+      <if test="spotsaddr != null" >
+        spotsAddr,
+      </if>
+      <if test="spotsaddr2 != null" >
+        spotsAddr2,
+      </if>
+      <if test="spotsopentime != null" >
+        spotsOpenTime,
+      </if>
+      <if test="spotsoneworlds != null" >
+        spotsOneWorlds,
+      </if>
+      <if test="spotsimg != null" >
+        spotsImg,
+      </if>
+      <if test="spotsstate != null" >
+        spotsState,
+      </if>
+      <if test="spotsfirst != null" >
+        spotsFirst,
+      </if>
+      <if test="spotshot != null" >
+        spotsHot,
+      </if>
+      <if test="spotsareaid != null" >
+        spotsAreaId,
+      </if>
+      <if test="spotsareaname != null" >
+        spotsAreaname,
+      </if>
+      <if test="spotsprice != null" >
+        spotsprice,
+      </if>
+      <if test="spotsdesc != null" >
+        spotsDesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="spotsid != null" >
+        #{spotsid,jdbcType=BIGINT},
+      </if>
+      <if test="spotsname != null" >
+        #{spotsname,jdbcType=VARCHAR},
+      </if>
+      <if test="spotsaddr != null" >
+        #{spotsaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="spotsaddr2 != null" >
+        #{spotsaddr2,jdbcType=VARCHAR},
+      </if>
+      <if test="spotsopentime != null" >
+        #{spotsopentime,jdbcType=VARCHAR},
+      </if>
+      <if test="spotsoneworlds != null" >
+        #{spotsoneworlds,jdbcType=VARCHAR},
+      </if>
+      <if test="spotsimg != null" >
+        #{spotsimg,jdbcType=VARCHAR},
+      </if>
+      <if test="spotsstate != null" >
+        #{spotsstate,jdbcType=INTEGER},
+      </if>
+      <if test="spotsfirst != null" >
+        #{spotsfirst,jdbcType=INTEGER},
+      </if>
+      <if test="spotshot != null" >
+        #{spotshot,jdbcType=INTEGER},
+      </if>
+      <if test="spotsareaid != null" >
+        #{spotsareaid,jdbcType=BIGINT},
+      </if>
+      <if test="spotsareaname != null" >
+        #{spotsareaname,jdbcType=VARCHAR},
+      </if>
+      <if test="spotsprice != null" >
+        #{spotsprice,jdbcType=REAL},
+      </if>
+      <if test="spotsdesc != null" >
+        #{spotsdesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateScenicSpots" parameterType="com.tang.panda.pojo.ScenicSpots">
+          update scenicspots
+          set spotsName=#{spotsname},
+          spotsAddr=#{spotsaddr},
+          spotsAddr2=#{spotsaddr2},
+          spotsOpenTime=#{spotsopentime},
+          spotsOneWorlds=#{spotsoneworlds},
+          spotsImg=#{spotsimg},
+          spotsState=#{spotsstate},
+          spotsFirst=#{spotsfirst},
+          spotsHot=#{spotshot},
+          spotsAreaId=#{spotsareaid},
+          spotsAreaname=#{spotsareaname},
+          spotsprice=#{spotsprice},
+          spotsDesc=#{spotsdesc}
+           where spotsid=#{spotsid}
+    </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.ScenicSpots" >
+    update scenicspots
+    <set >
+      <if test="spotsname != null" >
+        spotsName = #{spotsname,jdbcType=VARCHAR},
+      </if>
+      <if test="spotsaddr != null" >
+        spotsAddr = #{spotsaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="spotsaddr2 != null" >
+        spotsAddr2 = #{spotsaddr2,jdbcType=VARCHAR},
+      </if>
+      <if test="spotsopentime != null" >
+        spotsOpenTime = #{spotsopentime,jdbcType=VARCHAR},
+      </if>
+      <if test="spotsoneworlds != null" >
+        spotsOneWorlds = #{spotsoneworlds,jdbcType=VARCHAR},
+      </if>
+      <if test="spotsimg != null" >
+        spotsImg = #{spotsimg,jdbcType=VARCHAR},
+      </if>
+      <if test="spotsstate != null" >
+        spotsState = #{spotsstate,jdbcType=INTEGER},
+      </if>
+      <if test="spotsfirst != null" >
+        spotsFirst = #{spotsfirst,jdbcType=INTEGER},
+      </if>
+      <if test="spotshot != null" >
+        spotsHot = #{spotshot,jdbcType=INTEGER},
+      </if>
+      <if test="spotsareaid != null" >
+        spotsAreaId = #{spotsareaid,jdbcType=BIGINT},
+      </if>
+      <if test="spotsareaname != null" >
+        spotsAreaname = #{spotsareaname,jdbcType=VARCHAR},
+      </if>
+      <if test="spotsprice != null" >
+        spotsprice = #{spotsprice,jdbcType=REAL},
+      </if>
+      <if test="spotsdesc != null" >
+        spotsDesc = #{spotsdesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where spotsid = #{spotsid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tang.panda.pojo.ScenicSpots" >
+    update scenicspots
+    set spotsName = #{spotsname,jdbcType=VARCHAR},
+      spotsAddr = #{spotsaddr,jdbcType=VARCHAR},
+      spotsAddr2 = #{spotsaddr2,jdbcType=VARCHAR},
+      spotsOpenTime = #{spotsopentime,jdbcType=VARCHAR},
+      spotsOneWorlds = #{spotsoneworlds,jdbcType=VARCHAR},
+      spotsImg = #{spotsimg,jdbcType=VARCHAR},
+      spotsState = #{spotsstate,jdbcType=INTEGER},
+      spotsFirst = #{spotsfirst,jdbcType=INTEGER},
+      spotsHot = #{spotshot,jdbcType=INTEGER},
+      spotsAreaId = #{spotsareaid,jdbcType=BIGINT},
+      spotsAreaname = #{spotsareaname,jdbcType=VARCHAR},
+      spotsprice = #{spotsprice,jdbcType=REAL},
+      spotsDesc = #{spotsdesc,jdbcType=LONGVARCHAR}
+    where spotsid = #{spotsid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.ScenicSpots" >
+    update scenicspots
+    set spotsName = #{spotsname,jdbcType=VARCHAR},
+      spotsAddr = #{spotsaddr,jdbcType=VARCHAR},
+      spotsAddr2 = #{spotsaddr2,jdbcType=VARCHAR},
+      spotsOpenTime = #{spotsopentime,jdbcType=VARCHAR},
+      spotsOneWorlds = #{spotsoneworlds,jdbcType=VARCHAR},
+      spotsImg = #{spotsimg,jdbcType=VARCHAR},
+      spotsState = #{spotsstate,jdbcType=INTEGER},
+      spotsFirst = #{spotsfirst,jdbcType=INTEGER},
+      spotsHot = #{spotshot,jdbcType=INTEGER},
+      spotsAreaId = #{spotsareaid,jdbcType=BIGINT},
+      spotsAreaname = #{spotsareaname,jdbcType=VARCHAR},
+      spotsprice = #{spotsprice,jdbcType=REAL}
+    where spotsid = #{spotsid,jdbcType=BIGINT}
+  </update>
+</mapper>

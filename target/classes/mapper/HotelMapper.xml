@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.HotelMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.Hotel" >
+    <id column="hotelId" property="hotelid" jdbcType="BIGINT" />
+    <result column="hotelName" property="hotelname" jdbcType="VARCHAR" />
+    <result column="hotelEName" property="hotelename" jdbcType="VARCHAR" />
+    <result column="hotelAddr" property="hoteladdr" jdbcType="VARCHAR" />
+    <result column="hotelAddr2" property="hoteladdr2" jdbcType="VARCHAR" />
+    <result column="hotelImg" property="hotelimg" jdbcType="VARCHAR" />
+    <result column="hotelOpenTime" property="hotelopentime" jdbcType="VARCHAR" />
+    <result column="hotelChildPolicy" property="hotelchildpolicy" jdbcType="VARCHAR" />
+    <result column="hotelBreakFast" property="hotelbreakfast" jdbcType="VARCHAR" />
+    <result column="hotelPetPolicy" property="hotelpetpolicy" jdbcType="VARCHAR" />
+    <result column="hotelState" property="hotelstate" jdbcType="INTEGER" />
+    <result column="hotellable" property="hotellable" jdbcType="VARCHAR" />
+    <result column="hotelTypeId" property="hoteltypeid" jdbcType="BIGINT" />
+    <result column="hotelTypeName" property="hoteltypename" jdbcType="VARCHAR" />
+    <result column="hotelPrice" property="hotelprice" jdbcType="REAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tang.panda.pojo.Hotel" extends="BaseResultMap" >
+    <result column="hotelDesc" property="hoteldesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    hotelId, hotelName, hotelEName, hotelAddr, hotelAddr2, hotelImg, hotelOpenTime, hotelChildPolicy,
+    hotelBreakFast, hotelPetPolicy, hotelState, hotellable, hotelTypeId, hotelTypeName,
+    hotelPrice
+  </sql>
+  <sql id="Blob_Column_List" >
+    hotelDesc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hotel
+    where hotelId = #{hotelid,jdbcType=BIGINT}
+  </select>
+  <select id="selectHotelList" resultMap="ResultMapWithBLOBs" parameterType="com.tang.panda.pojo.Hotel" >
+    select
+    hotelId, hotelName, hotelEName, hotelAddr, hotelAddr2, hotelImg, hotelOpenTime, hotelChildPolicy,
+    hotelBreakFast, hotelPetPolicy, hotelState, hotellable, hotelTypeId, hotelTypeName,
+    hotelPrice
+    from hotel
+    <where>
+      <if test="hotelstate!=null and hotelstate!=-1 ">
+        and hotelstate=#{hotelstate}
+      </if>
+      <if test="hotelname!=null and hotelname!='' ">
+        and hotelname like #{hotelname}
+      </if>
+    </where>
+  </select>
+  <select id="selectHotelAll" resultMap="ResultMapWithBLOBs" parameterType="com.tang.panda.pojo.Hotel" >
+    select
+    hotelId, hotelName, hotelEName, hotelAddr, hotelAddr2, hotelImg, hotelOpenTime, hotelChildPolicy,
+    hotelBreakFast, hotelPetPolicy, hotelState, hotellable, hotelTypeId, hotelTypeName,
+    hotelPrice
+    from hotel
+    <where>
+      <if test="hotelstate!=null and hotelstate!=-1 ">
+        and hotelstate=#{hotelstate}
+      </if>
+      <if test="hotelname!=null and hotelname!='' ">
+        and hotelname like #{hotelname}
+      </if>
+      <if test="hoteltypename!=null and hoteltypename!='' ">
+        and hoteltypename like #{hoteltypename}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hotel
+    where hotelId = #{hotelid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.Hotel" >
+    insert into hotel (hotelId, hotelName, hotelEName,
+      hotelAddr, hotelAddr2, hotelImg,
+      hotelOpenTime, hotelChildPolicy, hotelBreakFast,
+      hotelPetPolicy, hotelState, hotellable,
+      hotelTypeId, hotelTypeName, hotelPrice,
+      hotelDesc)
+    values (#{hotelid,jdbcType=BIGINT}, #{hotelname,jdbcType=VARCHAR}, #{hotelename,jdbcType=VARCHAR},
+      #{hoteladdr,jdbcType=VARCHAR}, #{hoteladdr2,jdbcType=VARCHAR}, #{hotelimg,jdbcType=VARCHAR},
+      #{hotelopentime,jdbcType=VARCHAR}, #{hotelchildpolicy,jdbcType=VARCHAR}, #{hotelbreakfast,jdbcType=VARCHAR},
+      #{hotelpetpolicy,jdbcType=VARCHAR}, #{hotelstate,jdbcType=INTEGER}, #{hotellable,jdbcType=VARCHAR},
+      #{hoteltypeid,jdbcType=BIGINT}, #{hoteltypename,jdbcType=VARCHAR}, #{hotelprice,jdbcType=REAL},
+      #{hoteldesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.Hotel" >
+    insert into hotel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hotelid != null" >
+        hotelId,
+      </if>
+      <if test="hotelname != null" >
+        hotelName,
+      </if>
+      <if test="hotelename != null" >
+        hotelEName,
+      </if>
+      <if test="hoteladdr != null" >
+        hotelAddr,
+      </if>
+      <if test="hoteladdr2 != null" >
+        hotelAddr2,
+      </if>
+      <if test="hotelimg != null" >
+        hotelImg,
+      </if>
+      <if test="hotelopentime != null" >
+        hotelOpenTime,
+      </if>
+      <if test="hotelchildpolicy != null" >
+        hotelChildPolicy,
+      </if>
+      <if test="hotelbreakfast != null" >
+        hotelBreakFast,
+      </if>
+      <if test="hotelpetpolicy != null" >
+        hotelPetPolicy,
+      </if>
+      <if test="hotelstate != null" >
+        hotelState,
+      </if>
+      <if test="hotellable != null" >
+        hotellable,
+      </if>
+      <if test="hoteltypeid != null" >
+        hotelTypeId,
+      </if>
+      <if test="hoteltypename != null" >
+        hotelTypeName,
+      </if>
+      <if test="hotelprice != null" >
+        hotelPrice,
+      </if>
+      <if test="hoteldesc != null" >
+        hotelDesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hotelid != null" >
+        #{hotelid,jdbcType=BIGINT},
+      </if>
+      <if test="hotelname != null" >
+        #{hotelname,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelename != null" >
+        #{hotelename,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteladdr != null" >
+        #{hoteladdr,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteladdr2 != null" >
+        #{hoteladdr2,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelimg != null" >
+        #{hotelimg,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelopentime != null" >
+        #{hotelopentime,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelchildpolicy != null" >
+        #{hotelchildpolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelbreakfast != null" >
+        #{hotelbreakfast,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelpetpolicy != null" >
+        #{hotelpetpolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelstate != null" >
+        #{hotelstate,jdbcType=INTEGER},
+      </if>
+      <if test="hotellable != null" >
+        #{hotellable,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteltypeid != null" >
+        #{hoteltypeid,jdbcType=BIGINT},
+      </if>
+      <if test="hoteltypename != null" >
+        #{hoteltypename,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelprice != null" >
+        #{hotelprice,jdbcType=REAL},
+      </if>
+      <if test="hoteldesc != null" >
+        #{hoteldesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateHotel" parameterType="com.tang.panda.pojo.Hotel">
+          update hotel
+          set hotelName=#{hotelname},
+          hotelEName=#{hotelename},
+          hotelAddr=#{hoteladdr},
+          hotelAddr2=#{hoteladdr2},
+          hotelImg=#{hotelimg},
+          hotelOpenTime=#{hotelopentime},
+          hotelChildPolicy=#{hotelchildpolicy},
+          hotelBreakFast=#{hotelbreakfast},
+          hotelPetPolicy = #{hotelpetpolicy},
+          hotelState = #{hotelstate},
+          hotellable = #{hotellable},
+          hotelTypeId = #{hoteltypeid},
+          hotelTypeName = #{hoteltypename},
+          hotelPrice = #{hotelprice},
+          hotelDesc = #{hoteldesc}
+          where hotelId = #{hotelid}
+    </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.Hotel" >
+    update hotel
+    <set >
+      <if test="hotelname != null" >
+        hotelName = #{hotelname,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelename != null" >
+        hotelEName = #{hotelename,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteladdr != null" >
+        hotelAddr = #{hoteladdr,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteladdr2 != null" >
+        hotelAddr2 = #{hoteladdr2,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelimg != null" >
+        hotelImg = #{hotelimg,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelopentime != null" >
+        hotelOpenTime = #{hotelopentime,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelchildpolicy != null" >
+        hotelChildPolicy = #{hotelchildpolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelbreakfast != null" >
+        hotelBreakFast = #{hotelbreakfast,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelpetpolicy != null" >
+        hotelPetPolicy = #{hotelpetpolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelstate != null" >
+        hotelState = #{hotelstate,jdbcType=INTEGER},
+      </if>
+      <if test="hotellable != null" >
+        hotellable = #{hotellable,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteltypeid != null" >
+        hotelTypeId = #{hoteltypeid,jdbcType=BIGINT},
+      </if>
+      <if test="hoteltypename != null" >
+        hotelTypeName = #{hoteltypename,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelprice != null" >
+        hotelPrice = #{hotelprice,jdbcType=REAL},
+      </if>
+      <if test="hoteldesc != null" >
+        hotelDesc = #{hoteldesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where hotelId = #{hotelid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tang.panda.pojo.Hotel" >
+    update hotel
+    set hotelName = #{hotelname,jdbcType=VARCHAR},
+      hotelEName = #{hotelename,jdbcType=VARCHAR},
+      hotelAddr = #{hoteladdr,jdbcType=VARCHAR},
+      hotelAddr2 = #{hoteladdr2,jdbcType=VARCHAR},
+      hotelImg = #{hotelimg,jdbcType=VARCHAR},
+      hotelOpenTime = #{hotelopentime,jdbcType=VARCHAR},
+      hotelChildPolicy = #{hotelchildpolicy,jdbcType=VARCHAR},
+      hotelBreakFast = #{hotelbreakfast,jdbcType=VARCHAR},
+      hotelPetPolicy = #{hotelpetpolicy,jdbcType=VARCHAR},
+      hotelState = #{hotelstate,jdbcType=INTEGER},
+      hotellable = #{hotellable,jdbcType=VARCHAR},
+      hotelTypeId = #{hoteltypeid,jdbcType=BIGINT},
+      hotelTypeName = #{hoteltypename,jdbcType=VARCHAR},
+      hotelPrice = #{hotelprice,jdbcType=REAL},
+      hotelDesc = #{hoteldesc,jdbcType=LONGVARCHAR}
+    where hotelId = #{hotelid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.Hotel" >
+    update hotel
+    set hotelName = #{hotelname,jdbcType=VARCHAR},
+      hotelEName = #{hotelename,jdbcType=VARCHAR},
+      hotelAddr = #{hoteladdr,jdbcType=VARCHAR},
+      hotelAddr2 = #{hoteladdr2,jdbcType=VARCHAR},
+      hotelImg = #{hotelimg,jdbcType=VARCHAR},
+      hotelOpenTime = #{hotelopentime,jdbcType=VARCHAR},
+      hotelChildPolicy = #{hotelchildpolicy,jdbcType=VARCHAR},
+      hotelBreakFast = #{hotelbreakfast,jdbcType=VARCHAR},
+      hotelPetPolicy = #{hotelpetpolicy,jdbcType=VARCHAR},
+      hotelState = #{hotelstate,jdbcType=INTEGER},
+      hotellable = #{hotellable,jdbcType=VARCHAR},
+      hotelTypeId = #{hoteltypeid,jdbcType=BIGINT},
+      hotelTypeName = #{hoteltypename,jdbcType=VARCHAR},
+      hotelPrice = #{hotelprice,jdbcType=REAL}
+    where hotelId = #{hotelid,jdbcType=BIGINT}
+  </update>
+</mapper>

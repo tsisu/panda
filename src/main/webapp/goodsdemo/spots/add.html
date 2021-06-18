@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增加景点</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+        <blockquote class="layui-elem-quote layui-text">
+            增加景点
+        </blockquote>
+
+        <div class="layui-form layuimini-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label required">景点名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="spotsname" lay-verify="required" lay-reqtext="景点名称不能为空" placeholder="请输入景点名称" value="" class="layui-input">
+                    <tip>填写景点的名称。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">景点地域</label>
+                <div class="layui-input-block">
+                    <select name="spotsareaname" id="spotsarea">
+                        <option value=""></option>
+                    </select>
+                    <tip>选择景点地域态。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">景点地址</label>
+                <div class="layui-input-block">
+                    <input type="text" name="spotsaddr" lay-verify="required" lay-reqtext="景点地址不能为空" placeholder="请输入景点地址" value="" class="layui-input">
+                    <tip>填写景点的地址。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">景点经纬度</label>
+                <div class="layui-input-block">
+                    <input type="text" name="spotsaddr2"  placeholder="请输入景点经纬度" value="" class="layui-input">
+                    <tip>填写景点的经纬度（纬度,经度）。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">景点开放时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="spotsopentime"  placeholder="请输入景点开放时间" value="" class="layui-input">
+                    <tip>填写景点开放时间。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">一句话概括</label>
+                <div class="layui-input-block">
+                    <input type="text" name="spotsoneworlds"  placeholder="请输入景点的一句话概括" value="" class="layui-input">
+                    <tip>填写景点的一句话概括。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">宣传图片</label>
+                <div class="layui-input-inline uploadHeadImage">
+                    <div class="layui-upload-drag" id="headImg">
+                        <i class="layui-icon"></i>
+                        <p>点击上传图片，或将图片拖拽到此处</p>
+                    </div>
+                </div>
+                <div class="layui-input-inline">
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img headImage" style="width: 100px; height:100px" id="demo1">
+                        <p id="demoText"></p>
+                    </div>
+                </div>
+                <input type="hidden" name="spotsimg" id="spotsimg">
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">详细介绍</label>
+                <div class="layui-input-block">
+                    <div id="spotsdesc" name="spotsdesc" style="margin: 50px 0 50px 0">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">景点状态</label>
+                <div class="layui-input-block">
+                    <select name="spotsstate">
+                        <option value="0">不可用</option>
+                        <option value="1" selected="">可用</option>
+                    </select>
+                    <tip>选择景点的状态。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否首推</label>
+                <div class="layui-input-block">
+                    <select name="spotsfirst">
+                        <option value="0">不首推</option>
+                        <option value="1" selected="">首推</option>
+                    </select>
+                    <tip>选择景点是否首推。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否热门</label>
+                <div class="layui-input-block">
+                    <select name="spotshot">
+                        <option value="0">非热门</option>
+                        <option value="1" selected="">热门</option>
+                    </select>
+                    <tip>选择景点是否热门。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">票价</label>
+                <div class="layui-input-block">
+                    <input type="text" name="spotsprice" lay-verify="number"  placeholder="请输入景点的一句话概括" value="0" class="layui-input">
+                    <tip>填写景点的门票价格。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="saveBtn">确认保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
+<script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script src="../../js/config.js"></script>
+<script>
+    layui.use(["jquery", "upload", "form", "layer", "element",'wangEditor'], function () {
+        var $ = layui.$,
+            element = layui.element,
+            layer = layui.layer,
+            upload = layui.upload,
+            form = layui.form,
+            wangEditor = layui.wangEditor;
+        //拖拽上传
+        var uploadInst = upload.render({
+            elem: '#headImg'
+            , url: Config.serverurl+'/test/upload'
+            , size: 104857600 //上传文件大小限制，单位：kb
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {//上传完成执行这个方法
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+
+                //layer.alert(res.src);
+                //filename = res.src;
+                $("#spotsimg").val(res.src);
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #8f8f8f;">上传成功!!!</span>');
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+        //初始化富文本编辑器
+        var editor = new wangEditor('#spotsdesc');
+        editor.customConfig.uploadImgServer = Config.serverurl+'/test/upload';
+        editor.customConfig.uploadFileName = 'image';
+        editor.customConfig.pasteFilterStyle = false;
+        editor.customConfig.uploadImgMaxLength = 5;
+        editor.customConfig.uploadImgHooks = {
+            // 上传超时
+            timeout: function (xhr, editor) {
+                layer.msg('上传超时！')
+            },
+            // 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
+            customInsert: function (insertImg, result, editor) {
+                console.log(result);
+                if (result.code == 1) {
+                    var url = result.data.url;
+                    url.forEach(function (e) {
+                        insertImg(e);
+                    })
+                } else {
+                    layer.msg(result.msg);
+                }
+            }
+        };
+        editor.customConfig.customAlert = function (info) {
+            layer.msg(info);
+        };
+        editor.create();
+
+        //初始化景点地域下拉列表
+        $.ajax({
+            url:Config.serverurl+"/admin/goods/spots/arealist",
+            type:"get",
+            success:function (rtn) {
+                console.log(rtn);
+                var html = "";
+                for(var i=0;i<rtn.length;i++){
+                    html+=" <option value=\""+rtn[i].areaid+","+rtn[i].areaname+"\">"+rtn[i].areaname+"</option>"
+                }
+                $("#spotsarea").html(html);
+                form.render();
+            }
+        });
+        element.init();
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            //console.log(data.field);
+            $.ajax({
+                url:Config.serverurl+"/admin/goods/spots/add",
+                type:"post",
+                data:data.field,
+                success:function (rtn) {
+                    if(rtn>0){
+                        layer.alert("保存成功");
+                        // 关闭弹出层
+                        // layer.close(index);
+                    }else{
+                        layer.alert("保存失败");
+                    }
+                }
+            })
+            return false;
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

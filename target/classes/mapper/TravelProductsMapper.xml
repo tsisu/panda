@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.TravelProductsMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.TravelProducts" >
+    <id column="tpid" property="tpid" jdbcType="BIGINT" />
+    <result column="tptypeid" property="tptypeid" jdbcType="BIGINT" />
+    <result column="tpName" property="tpname" jdbcType="VARCHAR" />
+    <result column="tpImg" property="tpimg" jdbcType="VARCHAR" />
+    <result column="tpPrice" property="tpprice" jdbcType="REAL" />
+    <result column="tpState" property="tpstate" jdbcType="INTEGER" />
+    <result column="tpHot" property="tphot" jdbcType="INTEGER" />
+    <result column="tpFirst" property="tpfirst" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tang.panda.pojo.TravelProducts" extends="BaseResultMap" >
+    <result column="tpDesc" property="tpdesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tpid, tptypeid, tpName, tpImg, tpPrice, tpState, tpHot, tpFirst
+  </sql>
+  <sql id="Blob_Column_List" >
+    tpDesc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from travelproducts
+    where tpid = #{tpid,jdbcType=BIGINT}
+  </select>
+  <select id="selectTravelProductsList" resultMap="ResultMapWithBLOBs" parameterType="com.tang.panda.pojo.TravelProducts" >
+    select
+    tpid, tptypeid, tpName, tpImg, tpDesc, tpPrice, tpState, tpHot, tpFirst
+    from travelproducts
+    <where>
+      <if test="tpstate!=null and tpstate!=-1 ">
+        and tpstate=#{tpstate}
+      </if>
+      <if test="tpname!=null and tpname!='' ">
+        and tpname like #{tpname}
+      </if>
+    </where>
+  </select>
+  <select id="selectTravelProductsAll" resultMap="ResultMapWithBLOBs" parameterType="com.tang.panda.pojo.TravelProducts" >
+    select
+    tpid, tptypeid, tpName, tpImg, tpDesc, tpPrice, tpState, tpHot, tpFirst
+    from travelproducts
+    <where>
+      <if test="tpstate!=null and tpstate!=-1 ">
+        and tpstate=#{tpstate}
+      </if>
+      <if test="tpname!=null and tpname!='' ">
+        and tpname like #{tpname}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from travelproducts
+    where tpid = #{tpid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.TravelProducts" >
+    insert into travelproducts (tpid, tptypeid, tpName, 
+      tpImg, tpPrice, tpState, 
+      tpHot, tpFirst, tpDesc)
+    values (#{tpid,jdbcType=BIGINT}, #{tptypeid,jdbcType=BIGINT}, #{tpname,jdbcType=VARCHAR}, 
+      #{tpimg,jdbcType=VARCHAR}, #{tpprice,jdbcType=REAL}, #{tpstate,jdbcType=INTEGER}, 
+      #{tphot,jdbcType=INTEGER}, #{tpfirst,jdbcType=INTEGER}, #{tpdesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.TravelProducts" >
+    insert into travelproducts
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tpid != null" >
+        tpid,
+      </if>
+      <if test="tptypeid != null" >
+        tptypeid,
+      </if>
+      <if test="tpname != null" >
+        tpName,
+      </if>
+      <if test="tpimg != null" >
+        tpImg,
+      </if>
+      <if test="tpprice != null" >
+        tpPrice,
+      </if>
+      <if test="tpstate != null" >
+        tpState,
+      </if>
+      <if test="tphot != null" >
+        tpHot,
+      </if>
+      <if test="tpfirst != null" >
+        tpFirst,
+      </if>
+      <if test="tpdesc != null" >
+        tpDesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tpid != null" >
+        #{tpid,jdbcType=BIGINT},
+      </if>
+      <if test="tptypeid != null" >
+        #{tptypeid,jdbcType=BIGINT},
+      </if>
+      <if test="tpname != null" >
+        #{tpname,jdbcType=VARCHAR},
+      </if>
+      <if test="tpimg != null" >
+        #{tpimg,jdbcType=VARCHAR},
+      </if>
+      <if test="tpprice != null" >
+        #{tpprice,jdbcType=REAL},
+      </if>
+      <if test="tpstate != null" >
+        #{tpstate,jdbcType=INTEGER},
+      </if>
+      <if test="tphot != null" >
+        #{tphot,jdbcType=INTEGER},
+      </if>
+      <if test="tpfirst != null" >
+        #{tpfirst,jdbcType=INTEGER},
+      </if>
+      <if test="tpdesc != null" >
+        #{tpdesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateTravelProducts" parameterType="com.tang.panda.pojo.TravelProducts">
+          update travelproducts
+    set tptypeid = #{tptypeid},
+      tpName = #{tpname},
+      tpImg = #{tpimg},
+      tpPrice = #{tpprice},
+      tpState = #{tpstate},
+      tpHot = #{tphot},
+      tpFirst = #{tpfirst},
+      tpDesc = #{tpdesc}
+    where tpid = #{tpid}
+    </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.TravelProducts" >
+    update travelproducts
+    <set >
+      <if test="tptypeid != null" >
+        tptypeid = #{tptypeid,jdbcType=BIGINT},
+      </if>
+      <if test="tpname != null" >
+        tpName = #{tpname,jdbcType=VARCHAR},
+      </if>
+      <if test="tpimg != null" >
+        tpImg = #{tpimg,jdbcType=VARCHAR},
+      </if>
+      <if test="tpprice != null" >
+        tpPrice = #{tpprice,jdbcType=REAL},
+      </if>
+      <if test="tpstate != null" >
+        tpState = #{tpstate,jdbcType=INTEGER},
+      </if>
+      <if test="tphot != null" >
+        tpHot = #{tphot,jdbcType=INTEGER},
+      </if>
+      <if test="tpfirst != null" >
+        tpFirst = #{tpfirst,jdbcType=INTEGER},
+      </if>
+      <if test="tpdesc != null" >
+        tpDesc = #{tpdesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tpid = #{tpid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tang.panda.pojo.TravelProducts" >
+    update travelproducts
+    set tptypeid = #{tptypeid,jdbcType=BIGINT},
+      tpName = #{tpname,jdbcType=VARCHAR},
+      tpImg = #{tpimg,jdbcType=VARCHAR},
+      tpPrice = #{tpprice,jdbcType=REAL},
+      tpState = #{tpstate,jdbcType=INTEGER},
+      tpHot = #{tphot,jdbcType=INTEGER},
+      tpFirst = #{tpfirst,jdbcType=INTEGER},
+      tpDesc = #{tpdesc,jdbcType=LONGVARCHAR}
+    where tpid = #{tpid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.TravelProducts" >
+    update travelproducts
+    set tptypeid = #{tptypeid,jdbcType=BIGINT},
+      tpName = #{tpname,jdbcType=VARCHAR},
+      tpImg = #{tpimg,jdbcType=VARCHAR},
+      tpPrice = #{tpprice,jdbcType=REAL},
+      tpState = #{tpstate,jdbcType=INTEGER},
+      tpHot = #{tphot,jdbcType=INTEGER},
+      tpFirst = #{tpfirst,jdbcType=INTEGER}
+    where tpid = #{tpid,jdbcType=BIGINT}
+  </update>
+</mapper>

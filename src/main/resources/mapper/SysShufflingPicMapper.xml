@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.SysShufflingPicMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.SysShufflingPic" >
+    <id column="imgid" property="imgid" jdbcType="BIGINT" />
+    <result column="imgurl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="imgstate" property="imgstate" jdbcType="INTEGER" />
+    <result column="imgsort" property="imgsort" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    imgid, imgurl, imgstate, imgsort
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sysshufflingpic
+    where imgid = #{imgid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sysshufflingpic
+    where imgid = #{imgid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.SysShufflingPic" >
+    insert into sysshufflingpic (imgid, imgurl, imgstate, 
+      imgsort)
+    values (#{imgid,jdbcType=BIGINT}, #{imgurl,jdbcType=VARCHAR}, #{imgstate,jdbcType=INTEGER}, 
+      #{imgsort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.SysShufflingPic" >
+    insert into sysshufflingpic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="imgid != null" >
+        imgid,
+      </if>
+      <if test="imgurl != null" >
+        imgurl,
+      </if>
+      <if test="imgstate != null" >
+        imgstate,
+      </if>
+      <if test="imgsort != null" >
+        imgsort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="imgid != null" >
+        #{imgid,jdbcType=BIGINT},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgstate != null" >
+        #{imgstate,jdbcType=INTEGER},
+      </if>
+      <if test="imgsort != null" >
+        #{imgsort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.SysShufflingPic" >
+    update sysshufflingpic
+    <set >
+      <if test="imgurl != null" >
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgstate != null" >
+        imgstate = #{imgstate,jdbcType=INTEGER},
+      </if>
+      <if test="imgsort != null" >
+        imgsort = #{imgsort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where imgid = #{imgid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.SysShufflingPic" >
+    update sysshufflingpic
+    set imgurl = #{imgurl,jdbcType=VARCHAR},
+      imgstate = #{imgstate,jdbcType=INTEGER},
+      imgsort = #{imgsort,jdbcType=INTEGER}
+    where imgid = #{imgid,jdbcType=BIGINT}
+  </update>
+</mapper>

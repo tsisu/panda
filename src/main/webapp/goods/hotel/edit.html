@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改酒店信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+        <blockquote class="layui-elem-quote layui-text">
+            修改酒店信息
+        </blockquote>
+
+        <div class="layui-form layuimini-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label required">酒店名称</label>
+                <div class="layui-input-block">
+					<input type="hidden" id="hotelid" name="hotelid" lay-verify="required" value="" class="layui-input">
+                    <input type="text" id="hotelname" name="hotelname" lay-verify="required" lay-reqtext="酒店名称不能为空" placeholder="请输入酒店名称" value="" class="layui-input">
+                    <tip>填写酒店的名称。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">酒店英文名</label>
+                <div class="layui-input-block">
+                    <input type="text" id="hotelename" name="hotelename" lay-verify="required" lay-reqtext="酒店英文名不能为空" placeholder="请输入酒店英文名" value="" class="layui-input">
+                    <tip>填写酒店英文名。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">酒店地址</label>
+                <div class="layui-input-block">
+                    <input type="text" id="hoteladdr" name="hoteladdr" lay-verify="required" lay-reqtext="酒店地址不能为空" placeholder="请输入酒店地址" value="" class="layui-input">
+                    <tip>填写酒店的地址。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">酒店经纬度</label>
+                <div class="layui-input-block">
+                    <input type="text" id="hoteladdr2" name="hoteladdr2"  placeholder="请输入酒店经纬度" value="" class="layui-input">
+                    <tip>填写酒店的经纬度（纬度,经度）。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">宣传图片</label>
+                <div class="layui-input-inline uploadHeadImage">
+                    <div class="layui-upload-drag" id="headImg">
+                        <i class="layui-icon"></i>
+                        <p>点击上传图片，或将图片拖拽到此处</p>
+                    </div>
+                </div>
+                <div class="layui-input-inline">
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img headImage" style="width: 100px; height:100px" id="demo1">
+                        <p id="demoText"></p>
+                    </div>
+                </div>
+                <input type="hidden" name="hotelimg" id="hotelimg">
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">酒店开放时间</label>
+                <div class="layui-input-block">
+                    <input type="text" id="hotelopentime" name="hotelopentime" placeholder="请输入酒店开放时间" value="" class="layui-input">
+                    <tip>填写酒店开放时间。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">酒店儿童政策</label>
+                <div class="layui-input-block">
+                    <input type="text" id="hotelchildpolicy" name="hotelchildpolicy"  placeholder="请输入酒店的儿童政策" value="" class="layui-input">
+                    <tip>填写酒店的儿童政策。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">早餐供应</label>
+                <div class="layui-input-block">
+                    <input type="text" id="hotelbreakfast" name="hotelbreakfast"  placeholder="请输入酒店供应的早餐" value="" class="layui-input">
+                    <tip>填写酒店供应的早餐。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否可以带宠物入住</label>
+                <div class="layui-input-block">
+                    <select name="hotelpetpolicy">
+                        <option value="0">不可以</option>
+                        <option value="1" selected="">可以</option>
+                    </select>
+                    <tip>选择酒店是否可以带宠物入住。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">酒店状态</label>
+                <div class="layui-input-block">
+                    <select name="hotelstate">
+                        <option value="0">不可用</option>
+                        <option value="1" selected="">可用</option>
+                    </select>
+                    <tip>选择酒店的状态。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">酒店标签</label>
+                <div class="layui-input-block">
+                    <input type="text" id="hotellable" name="hotellable"  placeholder="请输入酒店标签" value="" class="layui-input">
+                    <tip>填写酒店标签。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">酒店类型名称</label>
+                <div class="layui-input-block">
+                    <select name="hoteltypename" id="hoteltypename">
+
+                    </select>
+                    <tip>选择酒店类型名称。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">票价</label>
+                <div class="layui-input-block">
+                    <input type="text" id="hotelprice" name="hotelprice" lay-verify="number"  placeholder="请输入酒店的价格" value="0" class="layui-input">
+                    <tip>填写酒店的价格。</tip>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label required">详细介绍</label>
+                <div class="layui-input-block">
+                    <div id="hoteldesc" name="hoteldesc" style="margin: 50px 0 50px 0">
+
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="saveBtn">确认保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
+<script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script src="../../js/config.js"></script>
+<script>
+    layui.use(["jquery", "upload", "form", "layer", "element","wangEditor"], function () {
+        var $ = layui.$,
+            element = layui.element,
+            layer = layui.layer,
+            upload = layui.upload,
+            form = layui.form,
+            wangEditor = layui.wangEditor;
+        $ = layui.$;
+        $.ajax({
+            url:"gethoteltype",
+            type:"get",
+            success:function (rtn) {
+                console.log(rtn);
+                var html = "";
+                for(var i=0;i<rtn.length;i++){
+                    html+=" <option value=\""+rtn[i].htid+","+rtn[i].htname+"\">"+rtn[i].htname+"</option>"
+                }
+                $("#hoteltype").html(html);
+                form.render();
+            }
+        });
+        /*//拖拽上传
+        var uploadInst = upload.render({
+            elem: '#headImg'
+            , url: '/tools/uploadimg'
+            , size: 5000 //上传文件大小限制，单位：kb
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {//上传完成执行这个方法
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+
+                //layer.alert(res.src);
+                //filename = res.src;
+                $("#spotsimg").val(res.msg);
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #8f8f8f;">上传成功!!!</span>');
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });*/
+        //拖拽上传
+        var uploadInst = upload.render({
+            elem: '#headImg'
+            , url: '/tools/uploadimg'
+            , size: 104857600 //上传文件大小限制，单位：kb
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {//上传完成执行这个方法
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+
+                //layer.alert(res.src);
+                //filename = res.src;
+
+                $("#hotelimg").val(res.src);
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #8f8f8f;">上传成功!!!</span>');
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+        //初始化富文本编辑器
+        var editor = new wangEditor('#hoteldesc');
+        editor.customConfig.uploadImgServer = '/goods/hotel/upload';
+        editor.customConfig.uploadFileName = 'file';
+        editor.customConfig.pasteFilterStyle = false;
+        editor.customConfig.uploadImgMaxLength = 5;
+        editor.customConfig.uploadImgHooks = {
+            // 上传超时
+            timeout: function (xhr, editor) {
+                layer.msg('上传超时！')
+            },
+            // 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
+            customInsert: function (insertImg, result, editor) {
+                console.log(result);
+                if (result.code == 0) {
+                    var url = "http://121.41.27.202/"+result.msg;
+                    // url.forEach(function (e) {
+                    insertImg(url);
+                    // })
+                } else {
+                    layer.msg(result.msg);
+                }
+            }
+        };
+        editor.customConfig.customAlert = function (info) {
+            layer.msg(info);
+        };
+        editor.create();
+
+        //初始化景点地域下拉列表
+        $.ajax({
+            url:"/goods/hotel/gethoteltype",
+            type:"get",
+            success:function (rtn) {
+                console.log(rtn);
+                var html = "";
+                for(var i=0;i<rtn.length;i++){
+                    html +=" <option value=\""+rtn[i].hti0d+","+rtn[i].htname+"\">"+rtn[i].htname+"</option>"
+                    //$("#spotsareaname").html(html);
+                }
+                $("#hoteltypename").html(html);
+                form.render();
+            }
+        });
+        element.init();
+
+        //初始化页面方法
+        var initpage = function(form){
+            //获取url参数
+            var id = Config.getUrlParam("id");
+            console.log(id);
+            //ajax调用初始化页面的数据接口，并对页面进行初始化
+            $.ajax({
+                url:"/goods/hotel/initedit?id="+id,
+                type:"get",
+                success:function (rtn) {
+                    console.log(rtn)
+                    $("#hotelid").val(rtn.hotelid);
+                    $("#hotelname").val(rtn.hotelname);
+                    $("#hotelename").val(rtn.hotelename);
+                    $("#hoteladdr").val(rtn.hoteladdr);
+                    $("#hoteladdr2").val(rtn.hoteladdr2);
+                    $("#hotelimg").val(rtn.hotelimg);
+                    $("#demo1").attr("src","http://121.41.27.202/"+rtn.hotelimg);
+                    $("#hotelopentime").val(rtn.hotelopentime);
+                    $("#hotelchildpolicy").val(rtn.hotelchildpolicy);
+                    $("#hotelbreakfast").val(rtn.hotelbreakfast);
+                    $("#hotelpetpolicy").val(rtn.hotelpetpolicy);
+                    $("#hotelstate").val(rtn.hotelstate);
+                    $("#hotellable").val(rtn.hotellable);
+                    $("#hoteltypename").val(rtn.hoteltypeid+","+rtn.hoteltypename);
+                    $("#hotelprice").val(rtn.hotelprice);
+                    editor.txt.html(rtn.hoteldesc);
+                    form.render();
+                    // initpage(form);
+                }
+            })
+        }
+        initpage(form);
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            data.field.hoteldesc = editor.txt.html();
+            console.log(data);
+            $.ajax({
+                url:"/goods/hotel/update",
+                type:"post",
+                data:data.field,
+                success:function (rtn) {
+                    if(rtn>0){
+                        layer.alert("保存成功");
+                        window.location.href="list.html";
+                    }else{
+                        layer.alert("保存失败");
+                    }
+                }
+            })
+            return false;
+        });
+
+    });
+</script>
+
+</body>
+</html>

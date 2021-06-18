@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.SysHotelTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.SysHotelType" >
+    <id column="htId" property="htid" jdbcType="BIGINT" />
+    <result column="htName" property="htname" jdbcType="VARCHAR" />
+    <result column="htState" property="htstate" jdbcType="INTEGER" />
+    <result column="htSort" property="htsort" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    htId, htName, htState, htSort
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from syshoteltype
+    where htId = #{htid,jdbcType=BIGINT}
+  </select>
+  <select id="selectSysHotelTypeList" resultMap="BaseResultMap" parameterType="com.tang.panda.pojo.SysHotelType" >
+    select
+    htId, htName, htState, htSort
+    from syshoteltype
+    <where>
+      <if test="htstate!=null and htstate!=-1 ">
+        and htstate=#{htstate}
+      </if>
+      <if test="htname!=null and htname!='' ">
+        and htname like #{htname}
+      </if>
+    </where>
+    order by htsort asc
+  </select>
+  <select id="selectSysHotelTypeAll" resultMap="BaseResultMap" parameterType="com.tang.panda.pojo.SysHotelType">
+    select *
+    from syshoteltype
+    <where>
+      <if test="areastate!=null and areastate!=-1 ">
+        and areastate=#{areastate}
+      </if>
+      <if test="htname!=null and htname!='' ">
+        and htname like #{htname}
+      </if>
+    </where>
+    order by htsort asc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from syshoteltype
+    where htId = #{htid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.SysHotelType" >
+    insert into syshoteltype (htId, htName, htState, 
+      htSort)
+    values (#{htid,jdbcType=BIGINT}, #{htname,jdbcType=VARCHAR}, #{htstate,jdbcType=INTEGER}, 
+      #{htsort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.SysHotelType" >
+    insert into syshoteltype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="htid != null" >
+        htId,
+      </if>
+      <if test="htname != null" >
+        htName,
+      </if>
+      <if test="htstate != null" >
+        htState,
+      </if>
+      <if test="htsort != null" >
+        htSort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="htid != null" >
+        #{htid,jdbcType=BIGINT},
+      </if>
+      <if test="htname != null" >
+        #{htname,jdbcType=VARCHAR},
+      </if>
+      <if test="htstate != null" >
+        #{htstate,jdbcType=INTEGER},
+      </if>
+      <if test="htsort != null" >
+        #{htsort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateSysHotelType" parameterType="com.tang.panda.pojo.SysHotelType">
+          update syshoteltype
+          set htName=#{htname},
+          htState=#{htstate},
+          htSort=#{htsort}
+           where htId=#{htid}
+    </update>
+  <update id="updateList" parameterType="com.tang.panda.pojo.SysHotelType" >
+    update syshoteltype
+    <set >
+      <if test="htname != null" >
+        htName = #{htname,jdbcType=VARCHAR},
+      </if>
+      <if test="htstate != null" >
+        htState = #{htstate,jdbcType=INTEGER},
+      </if>
+      <if test="htsort != null" >
+        htSort = #{htsort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where htId = #{htid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.SysHotelType" >
+    update syshoteltype
+    <set >
+      <if test="htname != null" >
+        htName = #{htname,jdbcType=VARCHAR},
+      </if>
+      <if test="htstate != null" >
+        htState = #{htstate,jdbcType=INTEGER},
+      </if>
+      <if test="htsort != null" >
+        htSort = #{htsort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where htId = #{htid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.SysHotelType" >
+    update syshoteltype
+    set htName = #{htname,jdbcType=VARCHAR},
+      htState = #{htstate,jdbcType=INTEGER},
+      htSort = #{htsort,jdbcType=INTEGER}
+    where htId = #{htid,jdbcType=BIGINT}
+  </update>
+</mapper>

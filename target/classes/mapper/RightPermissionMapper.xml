@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.RightPermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.RightPermission" >
+    <id column="preId" property="preid" jdbcType="BIGINT" />
+    <result column="preName" property="prename" jdbcType="VARCHAR" />
+    <result column="preDesc" property="predesc" jdbcType="VARCHAR" />
+    <result column="preUrl" property="preurl" jdbcType="VARCHAR" />
+    <result column="prePId" property="prepid" jdbcType="VARCHAR" />
+    <result column="preType" property="pretype" jdbcType="BIGINT" />
+    <result column="preSort" property="presort" jdbcType="BIGINT" />
+    <result column="preIcon" property="preicon" jdbcType="VARCHAR" />
+    <result column="preState" property="prestate" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    preId, preName, preDesc, preUrl, prePId, preType, preSort, preIcon, preState
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from rightpermission
+    where preId = #{preid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from rightpermission
+    where preId = #{preid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.RightPermission" >
+    insert into rightpermission (preId, preName, preDesc, 
+      preUrl, prePId, preType, 
+      preSort, preIcon, preState
+      )
+    values (#{preid,jdbcType=BIGINT}, #{prename,jdbcType=VARCHAR}, #{predesc,jdbcType=VARCHAR}, 
+      #{preurl,jdbcType=VARCHAR}, #{prepid,jdbcType=VARCHAR}, #{pretype,jdbcType=BIGINT}, 
+      #{presort,jdbcType=BIGINT}, #{preicon,jdbcType=VARCHAR}, #{prestate,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.RightPermission" >
+    insert into rightpermission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="preid != null" >
+        preId,
+      </if>
+      <if test="prename != null" >
+        preName,
+      </if>
+      <if test="predesc != null" >
+        preDesc,
+      </if>
+      <if test="preurl != null" >
+        preUrl,
+      </if>
+      <if test="prepid != null" >
+        prePId,
+      </if>
+      <if test="pretype != null" >
+        preType,
+      </if>
+      <if test="presort != null" >
+        preSort,
+      </if>
+      <if test="preicon != null" >
+        preIcon,
+      </if>
+      <if test="prestate != null" >
+        preState,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="preid != null" >
+        #{preid,jdbcType=BIGINT},
+      </if>
+      <if test="prename != null" >
+        #{prename,jdbcType=VARCHAR},
+      </if>
+      <if test="predesc != null" >
+        #{predesc,jdbcType=VARCHAR},
+      </if>
+      <if test="preurl != null" >
+        #{preurl,jdbcType=VARCHAR},
+      </if>
+      <if test="prepid != null" >
+        #{prepid,jdbcType=VARCHAR},
+      </if>
+      <if test="pretype != null" >
+        #{pretype,jdbcType=BIGINT},
+      </if>
+      <if test="presort != null" >
+        #{presort,jdbcType=BIGINT},
+      </if>
+      <if test="preicon != null" >
+        #{preicon,jdbcType=VARCHAR},
+      </if>
+      <if test="prestate != null" >
+        #{prestate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.RightPermission" >
+    update rightpermission
+    <set >
+      <if test="prename != null" >
+        preName = #{prename,jdbcType=VARCHAR},
+      </if>
+      <if test="predesc != null" >
+        preDesc = #{predesc,jdbcType=VARCHAR},
+      </if>
+      <if test="preurl != null" >
+        preUrl = #{preurl,jdbcType=VARCHAR},
+      </if>
+      <if test="prepid != null" >
+        prePId = #{prepid,jdbcType=VARCHAR},
+      </if>
+      <if test="pretype != null" >
+        preType = #{pretype,jdbcType=BIGINT},
+      </if>
+      <if test="presort != null" >
+        preSort = #{presort,jdbcType=BIGINT},
+      </if>
+      <if test="preicon != null" >
+        preIcon = #{preicon,jdbcType=VARCHAR},
+      </if>
+      <if test="prestate != null" >
+        preState = #{prestate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where preId = #{preid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.RightPermission" >
+    update rightpermission
+    set preName = #{prename,jdbcType=VARCHAR},
+      preDesc = #{predesc,jdbcType=VARCHAR},
+      preUrl = #{preurl,jdbcType=VARCHAR},
+      prePId = #{prepid,jdbcType=VARCHAR},
+      preType = #{pretype,jdbcType=BIGINT},
+      preSort = #{presort,jdbcType=BIGINT},
+      preIcon = #{preicon,jdbcType=VARCHAR},
+      preState = #{prestate,jdbcType=INTEGER}
+    where preId = #{preid,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.TravelProductsTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.TravelProductsType" >
+    <id column="tptypeid" property="tptypeid" jdbcType="BIGINT" />
+    <result column="tptypename" property="tptypename" jdbcType="VARCHAR" />
+    <result column="tptypeDesc" property="tptypedesc" jdbcType="VARCHAR" />
+    <result column="tptypeState" property="tptypestate" jdbcType="INTEGER" />
+    <result column="tptypeSort" property="tptypesort" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tptypeid, tptypename, tptypeDesc, tptypeState, tptypeSort
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from travelproductstype
+    where tptypeid = #{tptypeid,jdbcType=BIGINT}
+  </select>
+  <select id="selectTravelProductsTypeList" resultMap="BaseResultMap" parameterType="com.tang.panda.pojo.TravelProductsType" >
+    select *
+    from travelproductstype
+    <where>
+      <if test="tptypestate!=null and tptypestate!=-1 ">
+        and tptypestate=#{tptypestate}
+      </if>
+      <if test="tptypename!=null and tptypename!='' ">
+        and tptypename like #{tptypename}
+      </if>
+    </where>
+    order by tptypesort asc
+  </select>
+  <select id="selectTravelProductsTypeAll" resultMap="BaseResultMap" parameterType="com.tang.panda.pojo.TravelProductsType">
+    select *
+    from travelproductstype
+    <where>
+      <if test="tptypestate!=null and tptypestate!=-1 ">
+        and tptypestate=#{tptypestate}
+      </if>
+      <if test="tptypename!=null and tptypename!='' ">
+        and tptypename like #{tptypename}
+      </if>
+    </where>
+    order by tptypesort asc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from travelproductstype
+    where tptypeid = #{tptypeid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.TravelProductsType" >
+    insert into travelproductstype (tptypeid, tptypename, tptypeDesc, 
+      tptypeState, tptypeSort)
+    values (#{tptypeid,jdbcType=BIGINT}, #{tptypename,jdbcType=VARCHAR}, #{tptypedesc,jdbcType=VARCHAR}, 
+      #{tptypestate,jdbcType=INTEGER}, #{tptypesort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.TravelProductsType" >
+    insert into travelproductstype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tptypeid != null" >
+        tptypeid,
+      </if>
+      <if test="tptypename != null" >
+        tptypename,
+      </if>
+      <if test="tptypedesc != null" >
+        tptypeDesc,
+      </if>
+      <if test="tptypestate != null" >
+        tptypeState,
+      </if>
+      <if test="tptypesort != null" >
+        tptypeSort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tptypeid != null" >
+        #{tptypeid,jdbcType=BIGINT},
+      </if>
+      <if test="tptypename != null" >
+        #{tptypename,jdbcType=VARCHAR},
+      </if>
+      <if test="tptypedesc != null" >
+        #{tptypedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tptypestate != null" >
+        #{tptypestate,jdbcType=INTEGER},
+      </if>
+      <if test="tptypesort != null" >
+        #{tptypesort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateTravelProductsType" parameterType="com.tang.panda.pojo.TravelProductsType">
+          update travelproductstype
+    set tptypename = #{tptypename,jdbcType=VARCHAR},
+      tptypeDesc = #{tptypedesc,jdbcType=VARCHAR},
+      tptypeState = #{tptypestate,jdbcType=INTEGER},
+      tptypeSort = #{tptypesort,jdbcType=INTEGER}
+    where tptypeid = #{tptypeid,jdbcType=BIGINT}
+    </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.TravelProductsType" >
+    update travelproductstype
+    <set >
+      <if test="tptypename != null" >
+        tptypename = #{tptypename,jdbcType=VARCHAR},
+      </if>
+      <if test="tptypedesc != null" >
+        tptypeDesc = #{tptypedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tptypestate != null" >
+        tptypeState = #{tptypestate,jdbcType=INTEGER},
+      </if>
+      <if test="tptypesort != null" >
+        tptypeSort = #{tptypesort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where tptypeid = #{tptypeid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.TravelProductsType" >
+    update travelproductstype
+    set tptypename = #{tptypename,jdbcType=VARCHAR},
+      tptypeDesc = #{tptypedesc,jdbcType=VARCHAR},
+      tptypeState = #{tptypestate,jdbcType=INTEGER},
+      tptypeSort = #{tptypesort,jdbcType=INTEGER}
+    where tptypeid = #{tptypeid,jdbcType=BIGINT}
+  </update>
+</mapper>

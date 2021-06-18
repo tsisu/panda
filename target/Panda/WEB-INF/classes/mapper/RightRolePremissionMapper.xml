@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.RightRolePremissionMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.RightRolePremission" >
+    <id column="rpId" property="rpid" jdbcType="BIGINT" />
+    <result column="roleId" property="roleid" jdbcType="BIGINT" />
+    <result column="preId" property="preid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rpId, roleId, preId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from rightrolepremission
+    where rpId = #{rpid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from rightrolepremission
+    where rpId = #{rpid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.RightRolePremission" >
+    insert into rightrolepremission (rpId, roleId, preId
+      )
+    values (#{rpid,jdbcType=BIGINT}, #{roleid,jdbcType=BIGINT}, #{preid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.RightRolePremission" >
+    insert into rightrolepremission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rpid != null" >
+        rpId,
+      </if>
+      <if test="roleid != null" >
+        roleId,
+      </if>
+      <if test="preid != null" >
+        preId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rpid != null" >
+        #{rpid,jdbcType=BIGINT},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=BIGINT},
+      </if>
+      <if test="preid != null" >
+        #{preid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.RightRolePremission" >
+    update rightrolepremission
+    <set >
+      <if test="roleid != null" >
+        roleId = #{roleid,jdbcType=BIGINT},
+      </if>
+      <if test="preid != null" >
+        preId = #{preid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where rpId = #{rpid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.RightRolePremission" >
+    update rightrolepremission
+    set roleId = #{roleid,jdbcType=BIGINT},
+      preId = #{preid,jdbcType=BIGINT}
+    where rpId = #{rpid,jdbcType=BIGINT}
+  </update>
+</mapper>

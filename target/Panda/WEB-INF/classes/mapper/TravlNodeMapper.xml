@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.TravlNodeMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.TravlNode" >
+    <id column="tnId" property="tnid" jdbcType="BIGINT" />
+    <result column="cusId" property="cusid" jdbcType="BIGINT" />
+    <result column="ntypeid" property="ntypeid" jdbcType="BIGINT" />
+    <result column="tnTitle" property="tntitle" jdbcType="VARCHAR" />
+    <result column="tnState" property="tnstate" jdbcType="INTEGER" />
+    <result column="tnTime" property="tntime" jdbcType="TIMESTAMP" />
+    <result column="tnTypeName" property="tntypename" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tang.panda.pojo.TravlNode" extends="BaseResultMap" >
+    <result column="tnContent" property="tncontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tnId, cusId, ntypeid, tnTitle, tnState, tnTime, tnTypeName
+  </sql>
+  <sql id="Blob_Column_List" >
+    tnContent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from travlnode
+    where tnId = #{tnid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from travlnode
+    where tnId = #{tnid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.TravlNode" >
+    insert into travlnode (tnId, cusId, ntypeid, 
+      tnTitle, tnState, tnTime, 
+      tnTypeName, tnContent)
+    values (#{tnid,jdbcType=BIGINT}, #{cusid,jdbcType=BIGINT}, #{ntypeid,jdbcType=BIGINT}, 
+      #{tntitle,jdbcType=VARCHAR}, #{tnstate,jdbcType=INTEGER}, #{tntime,jdbcType=TIMESTAMP}, 
+      #{tntypename,jdbcType=VARCHAR}, #{tncontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.TravlNode" >
+    insert into travlnode
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tnid != null" >
+        tnId,
+      </if>
+      <if test="cusid != null" >
+        cusId,
+      </if>
+      <if test="ntypeid != null" >
+        ntypeid,
+      </if>
+      <if test="tntitle != null" >
+        tnTitle,
+      </if>
+      <if test="tnstate != null" >
+        tnState,
+      </if>
+      <if test="tntime != null" >
+        tnTime,
+      </if>
+      <if test="tntypename != null" >
+        tnTypeName,
+      </if>
+      <if test="tncontent != null" >
+        tnContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tnid != null" >
+        #{tnid,jdbcType=BIGINT},
+      </if>
+      <if test="cusid != null" >
+        #{cusid,jdbcType=BIGINT},
+      </if>
+      <if test="ntypeid != null" >
+        #{ntypeid,jdbcType=BIGINT},
+      </if>
+      <if test="tntitle != null" >
+        #{tntitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tnstate != null" >
+        #{tnstate,jdbcType=INTEGER},
+      </if>
+      <if test="tntime != null" >
+        #{tntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tntypename != null" >
+        #{tntypename,jdbcType=VARCHAR},
+      </if>
+      <if test="tncontent != null" >
+        #{tncontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.TravlNode" >
+    update travlnode
+    <set >
+      <if test="cusid != null" >
+        cusId = #{cusid,jdbcType=BIGINT},
+      </if>
+      <if test="ntypeid != null" >
+        ntypeid = #{ntypeid,jdbcType=BIGINT},
+      </if>
+      <if test="tntitle != null" >
+        tnTitle = #{tntitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tnstate != null" >
+        tnState = #{tnstate,jdbcType=INTEGER},
+      </if>
+      <if test="tntime != null" >
+        tnTime = #{tntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tntypename != null" >
+        tnTypeName = #{tntypename,jdbcType=VARCHAR},
+      </if>
+      <if test="tncontent != null" >
+        tnContent = #{tncontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tnId = #{tnid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tang.panda.pojo.TravlNode" >
+    update travlnode
+    set cusId = #{cusid,jdbcType=BIGINT},
+      ntypeid = #{ntypeid,jdbcType=BIGINT},
+      tnTitle = #{tntitle,jdbcType=VARCHAR},
+      tnState = #{tnstate,jdbcType=INTEGER},
+      tnTime = #{tntime,jdbcType=TIMESTAMP},
+      tnTypeName = #{tntypename,jdbcType=VARCHAR},
+      tnContent = #{tncontent,jdbcType=LONGVARCHAR}
+    where tnId = #{tnid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.TravlNode" >
+    update travlnode
+    set cusId = #{cusid,jdbcType=BIGINT},
+      ntypeid = #{ntypeid,jdbcType=BIGINT},
+      tnTitle = #{tntitle,jdbcType=VARCHAR},
+      tnState = #{tnstate,jdbcType=INTEGER},
+      tnTime = #{tntime,jdbcType=TIMESTAMP},
+      tnTypeName = #{tntypename,jdbcType=VARCHAR}
+    where tnId = #{tnid,jdbcType=BIGINT}
+  </update>
+</mapper>

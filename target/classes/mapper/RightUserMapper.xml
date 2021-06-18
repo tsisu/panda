@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.RightUserMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.RightUser" >
+    <id column="userid" property="userid" jdbcType="BIGINT" />
+    <result column="roleId" property="roleid" jdbcType="BIGINT" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="userPwd" property="userpwd" jdbcType="VARCHAR" />
+    <result column="userSalt" property="usersalt" jdbcType="VARCHAR" />
+    <result column="userTrueName" property="usertruename" jdbcType="VARCHAR" />
+    <result column="userSex" property="usersex" jdbcType="VARCHAR" />
+    <result column="userPhone" property="userphone" jdbcType="VARCHAR" />
+    <result column="userEmail" property="useremail" jdbcType="VARCHAR" />
+    <result column="userCreateTime" property="usercreatetime" jdbcType="TIMESTAMP" />
+    <result column="userUpdateTime" property="userupdatetime" jdbcType="TIMESTAMP" />
+    <result column="userLoginTime" property="userlogintime" jdbcType="TIMESTAMP" />
+    <result column="userState" property="userstate" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userid, roleId, userName, userPwd, userSalt, userTrueName, userSex, userPhone, userEmail, 
+    userCreateTime, userUpdateTime, userLoginTime, userState
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from rightuser
+    where userid = #{userid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from rightuser
+    where userid = #{userid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.RightUser" >
+    insert into rightuser (userid, roleId, userName, 
+      userPwd, userSalt, userTrueName, 
+      userSex, userPhone, userEmail, 
+      userCreateTime, userUpdateTime, userLoginTime, 
+      userState)
+    values (#{userid,jdbcType=BIGINT}, #{roleid,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, 
+      #{userpwd,jdbcType=VARCHAR}, #{usersalt,jdbcType=VARCHAR}, #{usertruename,jdbcType=VARCHAR}, 
+      #{usersex,jdbcType=VARCHAR}, #{userphone,jdbcType=VARCHAR}, #{useremail,jdbcType=VARCHAR}, 
+      #{usercreatetime,jdbcType=TIMESTAMP}, #{userupdatetime,jdbcType=TIMESTAMP}, #{userlogintime,jdbcType=TIMESTAMP}, 
+      #{userstate,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.RightUser" >
+    insert into rightuser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="roleid != null" >
+        roleId,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="userpwd != null" >
+        userPwd,
+      </if>
+      <if test="usersalt != null" >
+        userSalt,
+      </if>
+      <if test="usertruename != null" >
+        userTrueName,
+      </if>
+      <if test="usersex != null" >
+        userSex,
+      </if>
+      <if test="userphone != null" >
+        userPhone,
+      </if>
+      <if test="useremail != null" >
+        userEmail,
+      </if>
+      <if test="usercreatetime != null" >
+        userCreateTime,
+      </if>
+      <if test="userupdatetime != null" >
+        userUpdateTime,
+      </if>
+      <if test="userlogintime != null" >
+        userLoginTime,
+      </if>
+      <if test="userstate != null" >
+        userState,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpwd != null" >
+        #{userpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="usersalt != null" >
+        #{usersalt,jdbcType=VARCHAR},
+      </if>
+      <if test="usertruename != null" >
+        #{usertruename,jdbcType=VARCHAR},
+      </if>
+      <if test="usersex != null" >
+        #{usersex,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null" >
+        #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null" >
+        #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="usercreatetime != null" >
+        #{usercreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userupdatetime != null" >
+        #{userupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userlogintime != null" >
+        #{userlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userstate != null" >
+        #{userstate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.RightUser" >
+    update rightuser
+    <set >
+      <if test="roleid != null" >
+        roleId = #{roleid,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpwd != null" >
+        userPwd = #{userpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="usersalt != null" >
+        userSalt = #{usersalt,jdbcType=VARCHAR},
+      </if>
+      <if test="usertruename != null" >
+        userTrueName = #{usertruename,jdbcType=VARCHAR},
+      </if>
+      <if test="usersex != null" >
+        userSex = #{usersex,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null" >
+        userPhone = #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null" >
+        userEmail = #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="usercreatetime != null" >
+        userCreateTime = #{usercreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userupdatetime != null" >
+        userUpdateTime = #{userupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userlogintime != null" >
+        userLoginTime = #{userlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userstate != null" >
+        userState = #{userstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.RightUser" >
+    update rightuser
+    set roleId = #{roleid,jdbcType=BIGINT},
+      userName = #{username,jdbcType=VARCHAR},
+      userPwd = #{userpwd,jdbcType=VARCHAR},
+      userSalt = #{usersalt,jdbcType=VARCHAR},
+      userTrueName = #{usertruename,jdbcType=VARCHAR},
+      userSex = #{usersex,jdbcType=VARCHAR},
+      userPhone = #{userphone,jdbcType=VARCHAR},
+      userEmail = #{useremail,jdbcType=VARCHAR},
+      userCreateTime = #{usercreatetime,jdbcType=TIMESTAMP},
+      userUpdateTime = #{userupdatetime,jdbcType=TIMESTAMP},
+      userLoginTime = #{userlogintime,jdbcType=TIMESTAMP},
+      userState = #{userstate,jdbcType=INTEGER}
+    where userid = #{userid,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.NoteTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.NoteType" >
+    <id column="ntypeid" property="ntypeid" jdbcType="BIGINT" />
+    <result column="rtypename" property="rtypename" jdbcType="VARCHAR" />
+    <result column="rtypestate" property="rtypestate" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ntypeid, rtypename, rtypestate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from notetype
+    where ntypeid = #{ntypeid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from notetype
+    where ntypeid = #{ntypeid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.NoteType" >
+    insert into notetype (ntypeid, rtypename, rtypestate
+      )
+    values (#{ntypeid,jdbcType=BIGINT}, #{rtypename,jdbcType=VARCHAR}, #{rtypestate,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.NoteType" >
+    insert into notetype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ntypeid != null" >
+        ntypeid,
+      </if>
+      <if test="rtypename != null" >
+        rtypename,
+      </if>
+      <if test="rtypestate != null" >
+        rtypestate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ntypeid != null" >
+        #{ntypeid,jdbcType=BIGINT},
+      </if>
+      <if test="rtypename != null" >
+        #{rtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="rtypestate != null" >
+        #{rtypestate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.NoteType" >
+    update notetype
+    <set >
+      <if test="rtypename != null" >
+        rtypename = #{rtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="rtypestate != null" >
+        rtypestate = #{rtypestate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ntypeid = #{ntypeid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.NoteType" >
+    update notetype
+    set rtypename = #{rtypename,jdbcType=VARCHAR},
+      rtypestate = #{rtypestate,jdbcType=INTEGER}
+    where ntypeid = #{ntypeid,jdbcType=BIGINT}
+  </update>
+</mapper>

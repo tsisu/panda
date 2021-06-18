@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.HotelTrafficMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.HotelTraffic" >
+    <id column="htrId" property="htrid" jdbcType="BIGINT" />
+    <result column="hotelId" property="hotelid" jdbcType="BIGINT" />
+    <result column="htrDestination" property="htrdestination" jdbcType="VARCHAR" />
+    <result column="htrDesc" property="htrdesc" jdbcType="VARCHAR" />
+    <result column="htrTime" property="htrtime" jdbcType="VARCHAR" />
+    <result column="htrState" property="htrstate" jdbcType="INTEGER" />
+    <result column="htrSort" property="htrsort" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    htrId, hotelId, htrDestination, htrDesc, htrTime, htrState, htrSort
+  </sql>
+  <select id="selectHotelTrafficList" resultMap="BaseResultMap" parameterType="com.tang.panda.pojo.HotelTraffic" >
+    select
+    hotelId, htrDestination, htrDesc, htrTime,htrState,htrSort
+    from hoteltraffic
+    <where>
+      <if test="htrstate!=null and htrstate!=-1 ">
+        and htrstate=#{htrstate}
+      </if>
+      <if test="htrdestination!=null and htrdestination!='' ">
+        and htrdestination like #{htrdestination}
+      </if>
+    </where>
+    order by htrsort asc
+  </select>
+  <select id="selectHotelTrafficAll" resultMap="BaseResultMap" parameterType="com.tang.panda.pojo.HotelTraffic">
+    select *
+    from hoteltraffic
+    <where>
+      <if test="htrstate!=null and htrstate!=-1 ">
+        and htrstate=#{htrstate}
+      </if>
+      <if test="htrdestination!=null and htrdestination!='' ">
+        and htrdestination like #{htrdestination}
+      </if>
+    </where>
+    order by htrsort asc
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hoteltraffic
+    where htrId = #{htrid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hoteltraffic
+    where htrId = #{htrid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.HotelTraffic" >
+    insert into hoteltraffic (htrId, hotelId, htrDestination, 
+      htrDesc, htrTime, htrState, 
+      htrSort)
+    values (#{htrid,jdbcType=BIGINT}, #{hotelid,jdbcType=BIGINT}, #{htrdestination,jdbcType=VARCHAR}, 
+      #{htrdesc,jdbcType=VARCHAR}, #{htrtime,jdbcType=VARCHAR}, #{htrstate,jdbcType=INTEGER}, 
+      #{htrsort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.HotelTraffic" >
+    insert into hoteltraffic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="htrid != null" >
+        htrId,
+      </if>
+      <if test="hotelid != null" >
+        hotelId,
+      </if>
+      <if test="htrdestination != null" >
+        htrDestination,
+      </if>
+      <if test="htrdesc != null" >
+        htrDesc,
+      </if>
+      <if test="htrtime != null" >
+        htrTime,
+      </if>
+      <if test="htrstate != null" >
+        htrState,
+      </if>
+      <if test="htrsort != null" >
+        htrSort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="htrid != null" >
+        #{htrid,jdbcType=BIGINT},
+      </if>
+      <if test="hotelid != null" >
+        #{hotelid,jdbcType=BIGINT},
+      </if>
+      <if test="htrdestination != null" >
+        #{htrdestination,jdbcType=VARCHAR},
+      </if>
+      <if test="htrdesc != null" >
+        #{htrdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="htrtime != null" >
+        #{htrtime,jdbcType=VARCHAR},
+      </if>
+      <if test="htrstate != null" >
+        #{htrstate,jdbcType=INTEGER},
+      </if>
+      <if test="htrsort != null" >
+        #{htrsort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.HotelTraffic" >
+    update hoteltraffic
+    <set >
+      <if test="hotelid != null" >
+        hotelId = #{hotelid,jdbcType=BIGINT},
+      </if>
+      <if test="htrdestination != null" >
+        htrDestination = #{htrdestination,jdbcType=VARCHAR},
+      </if>
+      <if test="htrdesc != null" >
+        htrDesc = #{htrdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="htrtime != null" >
+        htrTime = #{htrtime,jdbcType=VARCHAR},
+      </if>
+      <if test="htrstate != null" >
+        htrState = #{htrstate,jdbcType=INTEGER},
+      </if>
+      <if test="htrsort != null" >
+        htrSort = #{htrsort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where htrId = #{htrid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.HotelTraffic" >
+    update hoteltraffic
+    set hotelId = #{hotelid,jdbcType=BIGINT},
+      htrDestination = #{htrdestination,jdbcType=VARCHAR},
+      htrDesc = #{htrdesc,jdbcType=VARCHAR},
+      htrTime = #{htrtime,jdbcType=VARCHAR},
+      htrState = #{htrstate,jdbcType=INTEGER},
+      htrSort = #{htrsort,jdbcType=INTEGER}
+    where htrId = #{htrid,jdbcType=BIGINT}
+  </update>
+</mapper>

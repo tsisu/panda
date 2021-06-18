@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.HotelImgsMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.HotelImgs" >
+    <id column="himgId" property="himgid" jdbcType="BIGINT" />
+    <result column="hotelId" property="hotelid" jdbcType="BIGINT" />
+    <result column="himgUrl" property="himgurl" jdbcType="VARCHAR" />
+    <result column="himgDesc" property="himgdesc" jdbcType="VARCHAR" />
+    <result column="himgSort" property="himgsort" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    himgId, hotelId, himgUrl, himgDesc, himgSort
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hotelimgs
+    where himgId = #{himgid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hotelimgs
+    where himgId = #{himgid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.HotelImgs" >
+    insert into hotelimgs (himgId, hotelId, himgUrl, 
+      himgDesc, himgSort)
+    values (#{himgid,jdbcType=BIGINT}, #{hotelid,jdbcType=BIGINT}, #{himgurl,jdbcType=VARCHAR}, 
+      #{himgdesc,jdbcType=VARCHAR}, #{himgsort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.HotelImgs" >
+    insert into hotelimgs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="himgid != null" >
+        himgId,
+      </if>
+      <if test="hotelid != null" >
+        hotelId,
+      </if>
+      <if test="himgurl != null" >
+        himgUrl,
+      </if>
+      <if test="himgdesc != null" >
+        himgDesc,
+      </if>
+      <if test="himgsort != null" >
+        himgSort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="himgid != null" >
+        #{himgid,jdbcType=BIGINT},
+      </if>
+      <if test="hotelid != null" >
+        #{hotelid,jdbcType=BIGINT},
+      </if>
+      <if test="himgurl != null" >
+        #{himgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="himgdesc != null" >
+        #{himgdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="himgsort != null" >
+        #{himgsort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.HotelImgs" >
+    update hotelimgs
+    <set >
+      <if test="hotelid != null" >
+        hotelId = #{hotelid,jdbcType=BIGINT},
+      </if>
+      <if test="himgurl != null" >
+        himgUrl = #{himgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="himgdesc != null" >
+        himgDesc = #{himgdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="himgsort != null" >
+        himgSort = #{himgsort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where himgId = #{himgid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.HotelImgs" >
+    update hotelimgs
+    set hotelId = #{hotelid,jdbcType=BIGINT},
+      himgUrl = #{himgurl,jdbcType=VARCHAR},
+      himgDesc = #{himgdesc,jdbcType=VARCHAR},
+      himgSort = #{himgsort,jdbcType=INTEGER}
+    where himgId = #{himgid,jdbcType=BIGINT}
+  </update>
+</mapper>

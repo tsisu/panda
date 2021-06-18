@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.TravelProductsImgsMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.TravelProductsImgs" >
+    <id column="tpimgId" property="tpimgid" jdbcType="BIGINT" />
+    <result column="tpid" property="tpid" jdbcType="BIGINT" />
+    <result column="tpimgUrl" property="tpimgurl" jdbcType="VARCHAR" />
+    <result column="tpimgDesc" property="tpimgdesc" jdbcType="VARCHAR" />
+    <result column="tpimgSort" property="tpimgsort" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tpimgId, tpid, tpimgUrl, tpimgDesc, tpimgSort
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from travelproductsimgs
+    where tpimgId = #{tpimgid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from travelproductsimgs
+    where tpimgId = #{tpimgid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.TravelProductsImgs" >
+    insert into travelproductsimgs (tpimgId, tpid, tpimgUrl, 
+      tpimgDesc, tpimgSort)
+    values (#{tpimgid,jdbcType=BIGINT}, #{tpid,jdbcType=BIGINT}, #{tpimgurl,jdbcType=VARCHAR}, 
+      #{tpimgdesc,jdbcType=VARCHAR}, #{tpimgsort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.TravelProductsImgs" >
+    insert into travelproductsimgs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tpimgid != null" >
+        tpimgId,
+      </if>
+      <if test="tpid != null" >
+        tpid,
+      </if>
+      <if test="tpimgurl != null" >
+        tpimgUrl,
+      </if>
+      <if test="tpimgdesc != null" >
+        tpimgDesc,
+      </if>
+      <if test="tpimgsort != null" >
+        tpimgSort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tpimgid != null" >
+        #{tpimgid,jdbcType=BIGINT},
+      </if>
+      <if test="tpid != null" >
+        #{tpid,jdbcType=BIGINT},
+      </if>
+      <if test="tpimgurl != null" >
+        #{tpimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="tpimgdesc != null" >
+        #{tpimgdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tpimgsort != null" >
+        #{tpimgsort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.TravelProductsImgs" >
+    update travelproductsimgs
+    <set >
+      <if test="tpid != null" >
+        tpid = #{tpid,jdbcType=BIGINT},
+      </if>
+      <if test="tpimgurl != null" >
+        tpimgUrl = #{tpimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="tpimgdesc != null" >
+        tpimgDesc = #{tpimgdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tpimgsort != null" >
+        tpimgSort = #{tpimgsort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where tpimgId = #{tpimgid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.TravelProductsImgs" >
+    update travelproductsimgs
+    set tpid = #{tpid,jdbcType=BIGINT},
+      tpimgUrl = #{tpimgurl,jdbcType=VARCHAR},
+      tpimgDesc = #{tpimgdesc,jdbcType=VARCHAR},
+      tpimgSort = #{tpimgsort,jdbcType=INTEGER}
+    where tpimgId = #{tpimgid,jdbcType=BIGINT}
+  </update>
+</mapper>

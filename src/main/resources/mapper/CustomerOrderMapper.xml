@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tang.panda.dao.CustomerOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.tang.panda.pojo.CustomerOrder" >
+    <id column="orderId" property="orderid" jdbcType="BIGINT" />
+    <result column="cusId" property="cusid" jdbcType="BIGINT" />
+    <result column="orderTime" property="ordertime" jdbcType="TIMESTAMP" />
+    <result column="orderstate" property="orderstate" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orderId, cusId, orderTime, orderstate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from customerorder
+    where orderId = #{orderid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from customerorder
+    where orderId = #{orderid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tang.panda.pojo.CustomerOrder" >
+    insert into customerorder (orderId, cusId, orderTime, 
+      orderstate)
+    values (#{orderid,jdbcType=BIGINT}, #{cusid,jdbcType=BIGINT}, #{ordertime,jdbcType=TIMESTAMP}, 
+      #{orderstate,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tang.panda.pojo.CustomerOrder" >
+    insert into customerorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="cusid != null" >
+        cusId,
+      </if>
+      <if test="ordertime != null" >
+        orderTime,
+      </if>
+      <if test="orderstate != null" >
+        orderstate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        #{orderid,jdbcType=BIGINT},
+      </if>
+      <if test="cusid != null" >
+        #{cusid,jdbcType=BIGINT},
+      </if>
+      <if test="ordertime != null" >
+        #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderstate != null" >
+        #{orderstate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tang.panda.pojo.CustomerOrder" >
+    update customerorder
+    <set >
+      <if test="cusid != null" >
+        cusId = #{cusid,jdbcType=BIGINT},
+      </if>
+      <if test="ordertime != null" >
+        orderTime = #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderstate != null" >
+        orderstate = #{orderstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where orderId = #{orderid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tang.panda.pojo.CustomerOrder" >
+    update customerorder
+    set cusId = #{cusid,jdbcType=BIGINT},
+      orderTime = #{ordertime,jdbcType=TIMESTAMP},
+      orderstate = #{orderstate,jdbcType=INTEGER}
+    where orderId = #{orderid,jdbcType=BIGINT}
+  </update>
+</mapper>
